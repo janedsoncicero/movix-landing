@@ -1385,17 +1385,18 @@ async function submit() {
   } catch (e) {}
 
   if (CONFIG.SCRIPT_URL) {
-    try {
-      await fetch(CONFIG.SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(lead)
-      });
-    } catch (e) {
+    if (navigator.onLine === false) {
       btn.disabled = false; btn.innerHTML = 'Tentar novamente <svg width="18" height="18"><use href="#i-arrow"/></svg>';
-      err.textContent = "Não conseguimos enviar agora. Verifique sua conexão com a internet e tente novamente.";
+      err.textContent = "Você está sem internet. Verifique sua conexão e tente novamente.";
       return;
+    }
+    // Envio em segundo plano: a confirmação aparece na hora, sem esperar a resposta do Google
+    // (a planilha leva alguns segundos para responder). sendBeacon continua o envio mesmo se a pessoa sair da página.
+    const payload = JSON.stringify(lead);
+    let queued = false;
+    try { queued = !!(navigator.sendBeacon && navigator.sendBeacon(CONFIG.SCRIPT_URL, new Blob([payload], { type: "text/plain;charset=utf-8" }))); } catch (e) {}
+    if (!queued) {
+      fetch(CONFIG.SCRIPT_URL, { method: "POST", mode: "no-cors", keepalive: true, headers: { "Content-Type": "text/plain;charset=utf-8" }, body: payload }).catch(() => {});
     }
   } else {
     console.warn("[MoviX] CONFIG.SCRIPT_URL vazio: cadastro salvo só neste navegador.", lead);
