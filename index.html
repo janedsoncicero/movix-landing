@@ -39,6 +39,7 @@
 
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+  main section[id] { scroll-margin-top: 72px; }
   body {
     margin: 0;
     background: var(--bg);
@@ -1476,6 +1477,24 @@ $("#year").textContent = new Date().getFullYear();
     i = (i + 1) % (steps.length + 1);
   }, 1500);
 })();
+
+/* A página sempre abre no topo (sem voltar para onde a pessoa estava nem pular para #seção) */
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+window.scrollTo(0, 0);
+window.addEventListener("pageshow", () => window.scrollTo(0, 0));
+
+/* Links internos rolam até a seção sem colocar #seção no endereço */
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const id = a.getAttribute("href").slice(1);
+  const target = id ? document.getElementById(id) : null;
+  if (id && !target) return;
+  e.preventDefault();
+  if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  else window.scrollTo({ top: 0, behavior: "smooth" });
+});
 
 /* Veículos online: varia em torno de 4.800 */
 (function live() {
