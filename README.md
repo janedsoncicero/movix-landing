@@ -110,4 +110,5 @@ A página `politica-de-privacidade.html` está ligada ao formulário e ao rodap�
 ## Hospedagem no Cloudflare Pages
 - Projeto ligado ao repositório `movix-landing` (branch `main`), sem comando de build e com pasta de saída `/`.
 - Cada envio para a branch `main` publica o site sozinho.
+- Endereço oficial: **https://site.movixtracker.com.br** (CNAME `site` → `movix-landing.pages.dev`).
 - Domínio: subdomínio de `movixtracker.com.br`, com uma entrada **CNAME** na zona DNS do Registro.br apontando para o endereço `*.pages.dev` do projeto. Os servidores DNS do domínio continuam no Registro.br.
