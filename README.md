@@ -12,6 +12,8 @@ Página: `index.html`. É um arquivo único, sem dependências, e pode ser hospe
 | `logo-movix-full.png` | Logo com slogan, usada no rodapé |
 | `logo-movix-original.jpg` | Arte original da logo (também usada na prévia de links) |
 | `favicon.png` | Ícone da aba do navegador |
+| `_headers` | Cache e cabeçalhos de segurança no Cloudflare Pages |
+| `robots.txt` | Orientação para buscadores |
 
 ## O funil
 
@@ -104,3 +106,8 @@ A página `politica-de-privacidade.html` está ligada ao formulário e ao rodap�
 
 ## Telas do aplicativo
 `img/app-lista.jpg`, `img/app-mapa.jpg` e `img/app-lista-mapa.jpg` são prints reais do aplicativo com nomes, placas, IMEIs, endereços e quantidades trocados por dados fictícios (a página informa isso abaixo das telas).
+
+## Hospedagem no Cloudflare Pages
+- Projeto ligado ao repositório `movix-landing` (branch `main`), sem comando de build e com pasta de saída `/`.
+- Cada envio para a branch `main` publica o site sozinho.
+- Domínio: subdomínio de `movixtracker.com.br`, com uma entrada **CNAME** na zona DNS do Registro.br apontando para o endereço `*.pages.dev` do projeto. Os servidores DNS do domínio continuam no Registro.br.
