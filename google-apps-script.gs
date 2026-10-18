@@ -1,6 +1,6 @@
 /**
  * MoviX: recebe os cadastros da landing page e salva na planilha Google.
- * Como instalar: veja movix/LEIA-ME.md
+ * Como instalar: veja o README.md
  */
 
 const SHEET_NAME = 'Leads';

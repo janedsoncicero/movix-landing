@@ -41,6 +41,8 @@ A planilha já foi criada no Google Drive: **MoviX - Cadastros da Landing Page**
 No primeiro cadastro, o script renomeia a aba para **Leads**, deixa o cabeçalho em destaque, congela a primeira linha e cria a lista de status (Novo, Em contato, Proposta enviada, Fechado, Perdido).
 
 ### 2. Ligar a página à planilha
+> Já configurado: o `SCRIPT_URL` do `index.html` aponta para o script da planilha MoviX - Cadastros da Landing Page.
+
 No `index.html`, procure por `CONFIG` (perto do início do `<script>`) e preencha:
 
 ```js
